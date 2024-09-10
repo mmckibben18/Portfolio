@@ -1,0 +1,172 @@
+---
+title: "McKibben DSC520 Ex. 6.2"
+author: "Makayla McKibben"
+date: "2024-07-12"
+output: pdf_document
+---
+
+# Iris Analysis 
+```{r setup, include=TRUE}
+knitr::opts_chunk$set(echo = TRUE)
+library(datasets)
+new_iris <- data.frame(iris)
+```
+
+## Average Sepal Length by Species
+
+```{r average sepal length, include=TRUE}
+knitr::opts_chunk$set(echo = TRUE)
+library(dplyr)
+head(str(new_iris))
+species_s1 <- select(new_iris, Sepal.Length, Species)
+
+species_1 <- slice(species_s1,1:50)
+setosa_avg_sl <- mean(species_1$Sepal.Length)
+
+species_2 <- slice(species_s1,51:100)
+versicolor_avg_sl <- mean(species_2$Sepal.Length)
+
+species_3 <- slice(species_s1,101:150)
+virginica_avg_sl <- mean(species_3$Sepal.Length)
+
+setosa_avg_sl
+versicolor_avg_sl
+virginica_avg_sl
+```
+```{r iris data splitting, include=TRUE}
+knitr::opts_chunk$set(echo = TRUE)
+species_sw <- select(new_iris, Sepal.Width, Species)
+
+species_1_sw <- slice(species_sw,1:50)
+species_2_sw <- slice(species_sw,51:100)
+species_3_sw <- slice(species_sw,101:150)
+
+species_pl <- select(new_iris, Petal.Length, Species)
+
+species_1_pl <- slice(species_pl,1:50)
+species_2_pl <- slice(species_pl,51:100)
+species_3_pl <- slice(species_pl,101:150)
+
+species_pw <- select(new_iris, Petal.Width, Species)
+
+species_1_pw <- slice(species_pw,1:50)
+species_2_pw <- slice(species_pw,51:100)
+species_3_pw <- slice(species_pw,101:150)
+```
+
+```{r ggplot2 load, include = FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(ggplot2)
+```
+
+
+## Visualizations
+```{r plots, include=TRUE}
+knitr::opts_chunk$set(echo = TRUE)
+setosa_hist_sl <- ggplot(species_1, aes(Sepal.Length))
+setosa_hist_sl + geom_histogram(binwidth = 0.05, fill = "lightgrey", color = "black") + 
+  labs(title = "Setosa Sepal Length", x ="Sepal Length", 
+       y = "Frequency") + xlim(4, 6)
+versicolor_hist_sl <- ggplot(species_2, aes(Sepal.Length))
+versicolor_hist_sl + geom_histogram(binwidth = 0.05, fill = "lightgrey", color = "black") + 
+  labs(title = "Versicolor Sepal Length", x ="Sepal Length", 
+       y = "Frequency") + xlim(4.5, 7.5)
+virginica_hist_sl <- ggplot(species_3, aes(Sepal.Length))
+virginica_hist_sl + geom_histogram(binwidth = 0.05, fill = "lightgrey", color = "black") + 
+  labs(title = "Virginica Sepal Length", x ="Sepal Length", 
+       y = "Frequency") + xlim(4.5, 8)
+
+setosa_hist_sw <- ggplot(species_1_sw, aes(Sepal.Width))
+setosa_hist_sw + geom_histogram(binwidth = 0.05, fill = "lightgrey", color = "black") + 
+  labs(title = "Setosa Sepal Width", x ="Sepal Width", 
+       y = "Frequency") + xlim(2, 4.5)
+versicolor_hist_sw <- ggplot(species_2_sw, aes(Sepal.Width))
+versicolor_hist_sw + geom_histogram(binwidth = 0.05, fill = "lightgrey", color = "black") + 
+  labs(title = "Versicolor Sepal Width", x ="Sepal Width", 
+       y = "Frequency") + xlim(2, 4)
+virginica_hist_sw <- ggplot(species_3_sw, aes(Sepal.Width))
+virginica_hist_sw + geom_histogram(binwidth = 0.05, fill = "lightgrey", color = "black") + 
+  labs(title = "Virginica Sepal Width", x ="Sepal Width", 
+       y = "Frequency") + xlim(2, 4)
+
+setosa_hist_pl <- ggplot(species_1_pl, aes(Petal.Length))
+setosa_hist_pl + geom_histogram(binwidth = 0.05, fill = "lightgrey", color = "black") + 
+  labs(title = "Setosa Petal Length", x ="Petal Length", 
+       y = "Frequency") + xlim(0.5, 2)
+versicolor_hist_pl <- ggplot(species_2_pl, aes(Petal.Length))
+versicolor_hist_pl + geom_histogram(binwidth = 0.05, fill = "lightgrey", color = "black") + 
+  labs(title = "Versicolor Petal Length", x ="Petal Length", 
+       y = "Frequency") + xlim(2.5, 5.5)
+virginica_hist_pl <- ggplot(species_3_pl, aes(Petal.Length))
+virginica_hist_pl + geom_histogram(binwidth = 0.05, fill = "lightgrey", color = "black") + 
+  labs(title = "Virginica Petal Length", x ="Petal Length", 
+       y = "Frequency") + xlim(4, 7)
+
+setosa_hist_pw <- ggplot(species_1_pw, aes(Petal.Width))
+setosa_hist_pw + geom_histogram(binwidth = 0.05, fill = "lightgrey", color = "black") + 
+  labs(title = "Setosa Petal Width", x ="Petal Width", 
+       y = "Frequency") + xlim(0, .75)
+versicolor_hist_pw <- ggplot(species_2_pw, aes(Petal.Width))
+versicolor_hist_pw + geom_histogram(binwidth = 0.05, fill = "lightgrey", color = "black") + 
+  labs(title = "Versicolor Petal Width", x ="Petal Width", 
+       y = "Frequency") + xlim(0.75, 2) 
+virginica_hist_pw <- ggplot(species_3_pw, aes(Petal.Width))
+virginica_hist_pw + geom_histogram(binwidth = 0.05, fill = "lightgrey", color = "black") + 
+  labs(title = "Virginica Petal Width", x ="Petal Width", 
+       y = "Frequency") + xlim(1.25, 2.75)
+setosa_box_sl <- ggplot(species_1, aes(Sepal.Length))
+setosa_box_sl + geom_boxplot(fill = "lightblue", color = "black", notch = TRUE) + 
+  labs(title = "Setosa Sepal Length", x ="Sepal Length", 
+       y = "Frequency")
+versicolor_box_sl <- ggplot(species_2, aes(Sepal.Length))
+versicolor_box_sl + geom_boxplot(fill = "lightblue", color = "black", notch = TRUE) + 
+  labs(title = "Versicolor Sepal Length", x ="Sepal Length", 
+       y = "Frequency") 
+virginica_box_sl <- ggplot(species_3, aes(Sepal.Length))
+virginica_box_sl + geom_boxplot(fill = "lightblue", color = "black", notch = TRUE) + 
+  labs(title = "Virginica Sepal Length", x ="Sepal Length", 
+       y = "Frequency")
+
+setosa_box_sw <- ggplot(species_1_sw, aes(Sepal.Width))
+setosa_box_sw + geom_boxplot(fill = "lightblue", color = "black", notch = TRUE) + 
+  labs(title = "Setosa Sepal Width", x ="Sepal Width", 
+       y = "Frequency")
+versicolor_box_sw <- ggplot(species_2_sw, aes(Sepal.Width))
+versicolor_box_sw + geom_boxplot(fill = "lightblue", color = "black", notch = TRUE) + 
+  labs(title = "Versicolor Sepal Width", x ="Sepal Width", 
+       y = "Frequency") 
+virginica_box_sw <- ggplot(species_3_sw, aes(Sepal.Width))
+virginica_box_sw + geom_boxplot(fill = "lightblue", color = "black", notch = TRUE) + 
+  labs(title = "Virginica Sepal Width", x ="Sepal Width", 
+       y = "Frequency")
+
+setosa_box_pl <- ggplot(species_1_pl, aes(Petal.Length))
+setosa_box_pl + geom_boxplot(fill = "lightblue", color = "black", notch = TRUE) + 
+  labs(title = "Setosa Petal Length", x ="Petal Length", 
+       y = "Frequency")
+versicolor_box_pl <- ggplot(species_2_pl, aes(Petal.Length))
+versicolor_box_pl + geom_boxplot(fill = "lightblue", color = "black", notch = TRUE) + 
+  labs(title = "Versicolor Petal Length", x ="Petal Length", 
+       y = "Frequency") 
+virginica_box_pl <- ggplot(species_3_pl, aes(Petal.Length))
+virginica_box_pl + geom_boxplot(fill = "lightblue", color = "black", notch = TRUE) + 
+  labs(title = "Virginica Petal Length", x ="Petal Length", 
+       y = "Frequency")
+
+setosa_box_pw <- ggplot(species_1_pw, aes(Petal.Width))
+setosa_box_pw + geom_boxplot(fill = "lightblue", color = "black", notch = TRUE) + 
+  labs(title = "Setosa Petal Width", x ="Petal Width", 
+       y = "Frequency")
+versicolor_box_pw <- ggplot(species_2_pw, aes(Petal.Width))
+versicolor_box_pw + geom_boxplot(fill = "lightblue", color = "black", notch = TRUE) + 
+  labs(title = "Versicolor Petal Width", x ="Petal Width", 
+       y = "Frequency") 
+virginica_box_pw <- ggplot(species_3_pw, aes(Petal.Width))
+virginica_box_pw + geom_boxplot(fill = "lightblue", color = "black", notch = TRUE) + 
+  labs(title = "Virginica Petal Width", x ="Petal Width", 
+       y = "Frequency")
+```
+Iris species Setosa has the shortest average sepal length of this data set while Virginica has the longest. Versicolor is in between these two.
+Average sepal width of Versicolor is the shortest, with Virginica in the middle, and Setosa being the longest.
+The average petal length increases from Setosa, the shortest, with Versicolor in the middle and Virginica as the longest.
+Average petal width increases from Setosa, the shortest, with Versicolor in the middle and Virginica being the longest.
