@@ -1,0 +1,303 @@
+---
+title: "McKibben DSC520 Final Project 9.3"
+author: "Makayla McKibben"
+date: "2024-08-03"
+output: pdf_document
+---
+# Week 8 Ex. 8.3
+
+## Introduction
+  Global awareness and tolerance of mental health conditions have been increasing rapidly in the last few years. However, a recent comprehensive analysis of the prevalence and most effective treatments of anxiety is not something I've come across. Mental illness and, specifically, anxiety is a topic that affects a great many people. Whether you are afflicted or have a spouse, relative, or friend who deals with mental illness, the impact of anxiety on a person's quality of life can touch nearly everyone. In order to determine the prevalence of anxiety and the effectiveness of various treatments, we will look at several datasets that provide recent, relevant information. R will be critical in analyzing this much data from these expansive datasets. While the World Health Organization published a study in 2019, and the NIH published a study using data from 2001 - 2004, I'd like to see how a more recent analysis will compare with their findings. This data and our inferences can be checked against the 2019 WHO analysis to see the progression of anxiety's pervasiveness and treatment options in the last five years and against the NIH study to see the change in the last 20 years.
+
+## Research questions
+  What are the most prevalent symptoms of anxiety?
+How many people experience symptoms of anxiety?
+Are specific demographics affected more heavily by anxiety?
+In the last five years, has the number of people affected by anxiety changed from the WHO study's predictions?
+In the last 20 years, has the number of people affected by anxiety changed from the NIH study?
+What medications are available to treat anxiety?
+Which medications appear to be most effective at treating anxiety?
+How many cases of anxiety are managed by the most effective medications?
+
+## Approach
+  The first part of the analysis will deal with datasets that involve the symptoms that indicate an anxiety disorder. We can establish trends from the number of people experiencing symptoms versus those diagnosed and possibly create theories about its pervasiveness; this will dovetail with the second part of our analysis. The second step will be to work with different global datasets to determine the trends of the prevalence of anxiety disorders and compare the data results between the first two analysis phases to see if our prediction about the number of people affected matches up. The last step will look at a dataset that has ratings of the effectiveness of psychiatric medications, which we will narrow down to anxiety. We can take the trends of prevalence and compare them to the effectiveness of various medications and make a supposition about whether or not certain medications seem more effective at treating anxiety. We can examine all of our datasets to see if specific demographics are particularly susceptible to experiencing anxiety and if certain medications are more effective for different demographic groups as well. We can use the data from the first two parts of our analysis and cross-correlate with the number of people prescribed effective medications to make a conjecture about how many cases of anxiety are well managed. 
+
+## How your approach addresses (fully or partially) the problem.
+  The datasets I intend to use are more recent than those from the 2019 WHO study which used data from 2018 and 2019 and the 20-year-old data from the NIH study. I have selected six datasets, two from 2022 and the remaining four updated this year. Once I've analyzed all of this more recent data, I can compare this new information with the WHO and NIH studies and see if there have been unaccounted-for changes.
+
+## Data  (Minimum of 3 Datasets - but no requirement on number of fields or rows)
+#### Global Mental Health Disorders 
+Kaggle
+https://www.kaggle.com/datasets/thedevastator/global-mental-health-disorders
+"This dataset contains valuable information about the prevalence of mental health disorders including schizophrenia, bipolar disorder, eating disorders, anxiety disorders, drug use disorders, depression, and alcohol use disorders from various countries across the globe."
+108554 rows, 11 columns
+Updated 2022
+Missing values left blank
+
+#### Gender Mental Disorder Prevalence 
+Kaggle
+https://www.kaggle.com/datasets/thedevastator/gender-mental-disorder-prevalence-2019
+"This dataset provides the gender-based prevalence of mental health disorders around the world in 2019."
+56396 rows, 8 columns
+Updated 2022
+Reisha Hermana
+Missing values left blank
+
+#### Mental Health Data (Anxiety) 
+Kaggle
+https://www.kaggle.com/datasets/michellevp/predicting-anxiety-in-mental-health-data
+"This dataset appears to contain a variety of features related to text analysis, sentiment analysis, and psychological indicators, likely derived from posts or text data. Additionally, there are features related to psychological aspects such as economic stress, isolation, substance use, and domestic stress. The dataset seems to cover a wide range of linguistic, psychological, and behavioral attributes, potentially suitable for analyzing mental health-related topics in online communities or text data."
+1968 rows, 350 columns
+Updated 2024
+Collected 2018-2019
+Missing values blank or zero
+
+#### Indicators of Anxiety or Depression 
+Kaggle
+https://www.kaggle.com/datasets/melissamonfared/indicators-of-anxiety-or-depression
+"This dataset contains information on the indicators of anxiety or depression based on the reported frequency of symptoms during the last 7 days. The data is collected through the Household Pulse Survey, launched by the U.S. Census Bureau in collaboration with five federal agencies."
+16093 rows, 14 columns
+Updated 2024
+Collected 2020-2024
+No missing values
+
+#### Mental Health Dataset 
+Kaggle
+https://www.kaggle.com/datasets/divaniazzahra/mental-health-dataset
+"This dataset records a global survey conducted to track trends in mental health. The data covers a range of variables such as levels of stress, depression, anxiety, subjective well-being, and use of mental health services. The survey involved respondents from various demographic backgrounds, including gender, employment status, and geographic region."
+292365 rows, 17 columns
+Updated 2024
+Collected 2014-2016
+No missing values
+
+#### WebMD Reviews for Psychiatric Drugs 
+Kaggle
+https://www.kaggle.com/datasets/sepidehparhami/psychiatric-drug-webmd-reviews
+"This dataset consists of unstructured text reviews, categorical ratings, and demographics from patients and caregivers of patients on various psychiatric drugs. The current version of the dataset contains over 61,000 reviews for hundreds of medications used to treat psychiatric disorders."
+61321 rows, 13 columns
+Updated 2024
+Collected 2007-2024
+Missing data cell is left blank
+
+#### Anxiety disorders 
+World Health Organization
+https://www.who.int/news-room/fact-sheets/detail/anxiety-disorders
+
+#### Any Anxiety Disorder 
+NIH
+https://www.nimh.nih.gov/health/statistics/any-anxiety-disorder
+
+## Required Packages
+At least:
+purrr
+tidyverse
+Metrics
+ggplot2
+
+## Plots and Table Needs
+We will need quite a few plots and tables. At least:
+Number of people experiencing anxiety symptoms
+	globally
+	% globally
+	by country
+	% by country
+	by demographic
+	% by demographic
+Number of people diagnosed with anxiety
+	globally
+	% globally
+	by country
+	% by country
+	by demographic
+	% by demographic
+The most prevalent anxiety symptoms
+	globally
+	% globally
+	by country
+	% by country
+	by demographic
+	% by demographic
+Most prevalent medications
+	globally
+	% globally
+	by country
+	% by country
+	by demographic
+	% by demographic
+Ratings of medications
+Number of people taking specified medication
+The number of cases we predict will be well-managed
+
+## Questions for future steps
+  Do we anticipate the trends in prevalence we've found to continue over the next five years? The following 10, 20?
+Do we anticipate the number of people with anxiety that is well-managed to change? How? 
+Are there newer medications that we do not have data on?
+Do we expect the representation of those diagnosed in specific demographics to change? How?
+
+## What do you not know how to do right now that you need to learn to answer your research questions?
+  I think I have all the resources and information I need to complete this project; it will just take time.
+
+# Week 9 Ex. 9.3
+
+## Code for Importing and Cleaning the Data
+```{r setup, include = TRUE, echo = TRUE}
+# Import necessary packages
+#install.packages("tidyverse")
+library(tidyverse)
+
+# Import all data files
+healthanxiety <- 
+  read.csv(file = 'healthanxiety_dataset.csv', 
+           header = TRUE, sep =",", stringsAsFactors = FALSE)
+
+indicators_anxiety <- 
+  read.csv(file = 'Indicators_of_Anxiety_or_Depression.csv', 
+           header = TRUE, sep =",", stringsAsFactors = FALSE)
+
+global_mental <- 
+  read.csv(file = 'Mental Health Data Global.csv', 
+           header = TRUE, sep =",", stringsAsFactors = FALSE)
+
+mental <- 
+  read.csv(file = 'Mental Health Dataset.csv', 
+           header = TRUE, sep =",", stringsAsFactors = FALSE)
+
+prevalence <- 
+  read.csv(file = 'prevalence-of-anxiety-disorders-males-vs-females.csv', 
+           header = TRUE, sep =",", stringsAsFactors = FALSE)
+
+meds <- 
+  read.csv(file = 'psychiatric_drug_webmd_reviews.csv', 
+           header = TRUE, sep =",", stringsAsFactors = FALSE)
+
+
+# Check out the data
+# First dataset
+head(healthanxiety)
+
+# Second dataset
+head(indicators_anxiety)
+# Turn data into a df
+indicators_anxiety <- as.data.frame(indicators_anxiety)
+# Find unique indicators
+unique(indicators_anxiety$Indicator)
+# Filter for only anxiety not depression
+indicators_anxiety <- filter(indicators_anxiety, 
+                             Indicator == 'Symptoms of Anxiety Disorder')
+# Validate that it worked
+head(indicators_anxiety, 8)
+
+# Third dataset
+head(global_mental)
+# Turn data into a df
+global_mental <- as.data.frame(global_mental)
+# Remove columns that we don't need
+colnames(global_mental)
+global_mental <- subset(global_mental, select = -c(Schizophrenia...., 
+                                                   Bipolar.disorder...., 
+                                                   Eating.disorders...., 
+                                                   Drug.use.disorders...., 
+                                                   Depression...., 
+                                                   Alcohol.use.disorders....))
+# Remove rows missing data
+global_mental <- global_mental[complete.cases(global_mental),]
+# Rename 
+global_mental <- global_mental %>% 
+  rename(anxiety = Anxiety.disorders....)
+# Check that the data has been trimmed down
+head(global_mental, 8)
+
+# Fourth dataset
+head(mental)
+# Turn data into dataframe
+mental <- as.data.frame(mental)
+# Remove columns that we don't need 
+colnames(mental)
+mental <- subset(mental, select = -c(Occupation, 
+                                     self_employed, 
+                                     family_history, 
+                                     Days_Indoors, 
+                                     Growing_Stress, 
+                                     Changes_Habits, 
+                                     Mental_Health_History, 
+                                     Mood_Swings, 
+                                     Coping_Struggles, 
+                                     Work_Interest, 
+                                     Social_Weakness, 
+                                     mental_health_interview, 
+                                     care_options))
+# Remove rows missing data
+mental <- mental[complete.cases(mental),]
+# Check that the data has been trimmed
+head(mental, 8)
+
+# Fifth dataset
+head(prevalence)
+# Turn data into dataframe
+prevalence <- as.data.frame(prevalence)
+# Remove columns that we don't need
+colnames(prevalence)
+prevalence <- subset(prevalence, select = -c(Continent, 
+                                      Population..historical.estimates.))
+# Rename columns
+prevalence <- prevalence %>% 
+  rename(index = index, entity = Entity, code = Code, year = Year, male = Prevalence...Anxiety.disorders...Sex..Male...Age..Age.standardized..Percent., 
+female = 
+Prevalence...Anxiety.disorders...Sex..Female...Age..Age.standardized..Percent.)
+# Check changes
+head(prevalence, 8)
+
+# Sixth dataset
+head(meds)
+# Turn data into dataframe
+meds <- as.data.frame(meds)
+# Remove columns that we don't need
+colnames(meds)
+meds <- subset(meds, select = -c(time_on_drug, text))
+# Find conditions that are anxiety related
+unique(meds$condition)
+# The following would qualify as something I don't know how to do 
+# that could be helpful to know.
+# I don't know if there is a way to iterate through the unique items in the 
+# condition column and find conditions that are anxiety related using R.
+# I would imagine it could be done through a loop and doing a partial match 
+# to condition which contains the letters "anx". I looked through the printed 
+# conditions myself and then coded the following lines.
+
+# Remove rows that aren't anxiety related
+meds <- subset(meds, condition == "Anxious" | 
+                 condition == "Severe Anxiety" | 
+                 condition == "Repeated Episodes of Anxiety")
+# Remove rows that have missing values
+meds <- meds[complete.cases(meds),] 
+# Check changes
+head(meds, 8)
+
+# Summarize all datasets 
+head(indicators_anxiety, 8)
+head(global_mental, 8)
+head(mental, 8)
+head(prevalence, 8)
+head(meds, 8)
+```
+## Data Importing and Cleaning
+  The first step to take is going to be importing all of the data from the csv files. After that it will be to parse the data in order to condense the datasets down to the appropriate columns. Once the data has been parsed we will remove rows with missing data to create datasets that have all the necessary columns. The code in the above section prints the kept columns and first eight rows of each dataset.
+
+## Exceptions
+Unfortunately, the dataset that has the symptoms isn't very useable. I don't believe this first dataset is actually useful for me. There's lots of data but not useful for this particalur analysis. 
+  
+## Data Discovery
+  The data from the indicators dataset seems very promising. It breaks down the data by date, age group, ethnicity, gender, education level, and state. We can group the data by these categories throughout the timeframes that all the categories span. We should then make plots over time for all of these values. We can then look to the global_mental dataset and find the prevalence per country. In that prevalence dataset we can average the prevalence between male and female and compare that to the results from the indicators and global_mental datasets. We can then compare the prevalence by male or female from the indicator groups, and compare that to the mental and prevalence datasets sorted by gender. We should average all the results for female and male from all of the datasets. We can then look at the treatment dataset from WebMD and see how many people are receiving treatment and what medications they are taking. This can also be broken down by gender for more information. To answer our research questions we look at the prevalence of anxiety per location, gender, race, and age. Then we can look at the effectiveness of medication for each group. 
+
+## Variables and Data Preparation
+  I think that the datasets have all the appropriate variables aside from the cumulative female and male results. We can compare all of our results to the NIH and WHO findings. And all of the results can be used in comparisons plots for all of the demographic categories.
+
+## Machine Learning
+  I'm not sure how to incorporate machine learning currently. I've removed some categories from the datasets that could potentially be useful for making models that predict anxiety from symptoms, demographics, and comorbidities. If I could make this model I think machine learning would be useful in order to look at more datasets.
+
+## For the Future
+  I think making models and using machine learning to look at new data would be something I'd really like to do. There are some ethical and privacy concerns with doing this though.
+  
+## Things to Learn
+  The first dataset has a text field that I'm unsure how to parse for symptoms in R. The way I would approach this would be to parse the whole text field down into individual words. I'd then compare the words individually to a list of symptoms I defined. Alternatively, I'd probably need AI to parse the text field to find all the symptoms. That may be the better way to search through the text field because doing it myself does not account for if someone says these are symptoms they're not experiencing. The string comparison method only looks for the presence of a word not the context.
+  I'd also like to know how to print nice tables of data both in R and to files from R.

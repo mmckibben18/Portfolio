@@ -1,0 +1,8 @@
+---
+title: "McKibben DSC500 Ex. 8.2"
+author: "Makayla McKibben"
+date: "2024-07-29"
+output: pdf_document
+---
+
+I elected to do four plots of the same information to show how different visualizations of the same thing can be with varying quality. The first sheet is in my opinion is the best formatted. The circles are relative to each other and size proportionate. The colors aren't offensive to look at and they're not a gradient correlated to the data. The sheet overall conveys the information the best. Sheet two is also size proportionate but the rectangles are much harder to look at. Same color palette for all sheets. The rectangles don't have enough negative space so it's just a wall of info. Sheet three is a more classic pie chart but it's not size proportionate, neither is the last sheet. The classic pie chart is too much to look at, too many divisions to look at. Sheet four does not convey the information well in comparison to sheet one with the only difference being the orientation of the circles and size proportions. 

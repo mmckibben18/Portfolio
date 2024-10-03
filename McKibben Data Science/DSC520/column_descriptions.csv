@@ -1,0 +1,13 @@
+column_name,description
+drug_name,Name of medication being reviewed
+date,Date of review
+age,"Age group of patient, selected from a dropdown list"
+gender,"Gender of patient, selected from a dropdown list"
+time_on_drug,"How long the medication has been taken, selected from a dropdown list"
+reviewer_type,"The type of person reviewing, patient or caregiver"
+condition,"The ""main reason for taking this medication,"" selected from a dropdown list"
+rating_overall,"Overall rating for the drug, the average of rating_effectiveness, rating_ease_of_use, and rating_satisfaction, from 1 to 5"
+rating_effectiveness,"Agreement with the statement ""This drug has worked for me,"" from 1 to 5 stars"
+rating_ease_of_use,"Agreement with the statement ""This medication has been easy for me to use,"" from 1 to 5 stars"
+rating_satisfaction,"Agreement with the statement ""Overall, I have been satisfied with my experience,"" from 1 to 5 stars"
+text,"Raw, unstructured text response to ""Write a brief description of your experience with this treatment."""

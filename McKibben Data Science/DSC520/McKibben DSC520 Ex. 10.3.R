@@ -1,0 +1,239 @@
+# Makayla McKibben
+# Final Project 9.3
+# Week 9
+# 08.04.2024
+
+# Import necessary packages
+install.packages("tidyverse")
+library(tidyverse)
+library(dplyr)
+
+# Week 10
+
+#Import Dataset 2
+indicators_anxiety <- 
+  read.csv(file = 'Indicators_of_Anxiety_or_Depression.csv', header = TRUE, sep =",", stringsAsFactors = FALSE)
+# Second dataset
+head(indicators_anxiety)
+# Turn data into a df
+indicators_anxiety <- as.data.frame(indicators_anxiety)
+# Find unique indicators
+unique(indicators_anxiety$Indicator)
+# Filter for only anxiety not depression
+indicators_anxiety <- filter(indicators_anxiety, Indicator == 'Symptoms of Anxiety Disorder')
+# Validate that it worked
+head(indicators_anxiety, 8)
+# Remove missing data
+indicators_anxiety <- na.omit(indicators_anxiety)
+# Check the phases of the study
+unique(indicators_anxiety$Phase)
+# Change phases to simple numbers
+indicators_anxiety <- indicators_anxiety %>%
+  mutate(Phase = recode(Phase, '-1' = '0', '3.0 (Oct 28 - Dec 21)' = '3.0', '3.0 (Jan 6 - Mar 29)' = '3.0'))
+indicators_phase_1 = subset(indicators_anxiety, Phase == '1.0')
+indicators_val_1 <- mean(indicators_phase_1$Value)
+indicators_phase_2 = subset(indicators_anxiety, Phase == '2.0')
+indicators_val_2 <- mean(indicators_phase_2$Value)
+indicators_phase_3 = subset(indicators_anxiety, Phase == '3.0')
+indicators_val_3 <- mean(indicators_phase_3$Value)
+indicators_phase_3_1 = subset(indicators_anxiety, Phase == '3.1')
+indicators_val_3_1 <- mean(indicators_phase_3_1$Value)
+indicators_phase_3_2 = subset(indicators_anxiety, Phase == '3.2')
+indicators_val_3_2 <- mean(indicators_phase_3_2$Value)
+indicators_phase_3_3 = subset(indicators_anxiety, Phase == '3.3')
+indicators_val_3_3 <- mean(indicators_phase_3_3$Value)
+indicators_phase_3_4 = subset(indicators_anxiety, Phase == '3.4')
+indicators_val_3_4 <- mean(indicators_phase_3_4$Value)
+indicators_phase_3_5 = subset(indicators_anxiety, Phase == '3.5')
+indicators_val_3_5 <- mean(indicators_phase_3_5$Value)
+indicators_phase_3_6 = subset(indicators_anxiety, Phase == '3.6')
+indicators_val_3_6 <- mean(indicators_phase_3_6$Value)
+indicators_phase_3_7 = subset(indicators_anxiety, Phase == '3.7')
+indicators_val_3_7 <- mean(indicators_phase_3_7$Value)
+indicators_phase_3_8 = subset(indicators_anxiety, Phase == '3.8')
+indicators_val_3_8 <- mean(indicators_phase_3_8$Value)
+indicators_phase_3_9 = subset(indicators_anxiety, Phase == '3.9')
+indicators_val_3_9 <- mean(indicators_phase_3_9$Value)
+indicators_phase_3_10 = subset(indicators_anxiety, Phase == '3.10')
+indicators_val_3_10 <- mean(indicators_phase_3_10$Value)
+indicators_phase_4 = subset(indicators_anxiety, Phase == '4.0')
+indicators_val_4 <- mean(indicators_phase_4$Value)
+indicators_phase_4_1 = subset(indicators_anxiety, Phase == '4.1')
+indicators_val_4_1 <- mean(indicators_phase_4_1$Value)
+indicators_mean_val <- c(indicators_val_1, indicators_val_2, indicators_val_3, indicators_val_3_1, indicators_val_3_2, indicators_val_3_3, indicators_val_3_4, indicators_val_3_5, indicators_val_3_6, indicators_val_3_7, indicators_val_3_8, indicators_val_3_9, indicators_val_3_10, indicators_val_4, indicators_val_4_1)
+round(indicators_mean_val, 2)
+
+# Check data
+head(indicators_anxiety)
+# Plot % of people experiencing 
+indicators_plot <- ggplot(indicators_anxiety, aes(Phase, Value))
+indicators_plot + geom_point(shape = 18, size = 1.8, color = "purple") + theme(panel.grid = 
+element_line(color = "lightgrey", linewidth = 0.8, linetype = 1), 
+panel.background = element_rect(color = "white", fill = "darkgrey")) +
+  labs(title = "Anxiety", x ="Phase", y = "Value")
+
+# According to the phases of the study there is a general downward trend as the phases progress. 
+# In 2024, which are phases 4.0 and 4.1 there is the smallest average value from the dataset.
+
+# Import dataset 3
+global_mental <- 
+  read.csv(file = 'Mental Health Data Global.csv', header = TRUE, sep =",", stringsAsFactors = FALSE)
+# Third dataset
+head(global_mental)
+# Turn data into a df
+global_mental <- as.data.frame(global_mental)
+# Remove columns that we don't need
+colnames(global_mental)
+global_mental <- subset(global_mental, select = -c(Schizophrenia...., Bipolar.disorder...., Eating.disorders...., Drug.use.disorders...., Depression...., Alcohol.use.disorders....))
+# Remove rows missing data
+global_mental <- global_mental[complete.cases(global_mental),]
+# Rename 
+global_mental <- global_mental %>% 
+  rename(anxiety = Anxiety.disorders....)
+# Check that the data has been trimmed down
+head(global_mental, 8)
+# Check unique locations
+unique(global_mental$Entity)
+# Subset to US for this analysis
+global_mental <- subset(global_mental, Entity == "United States")
+# Check for US prevalence
+head(global_mental)
+# Plot % of people experiencing anxiety
+global_plot <- ggplot(global_mental, aes(Year, anxiety))
+global_plot + geom_point(shape = 18, size = 2.8, color = "purple") + theme(panel.grid = 
+  element_line(color = "lightgrey", linewidth = 0.8, linetype = 1), 
+  panel.background = element_rect(color = "white", fill = "darkgrey")) +
+  labs(title = "US Anxiety", x ="Year", y = "Percent of People Experiencing Anxiety") +
+  theme(axis.text.x = element_text(angle = 90))
+
+# According to the global_mental dataset there is a downward trend of people experiencing anxiety from 2007 on. 
+# This seems odd given the recession starting in that timeframe. There may not be a strong correlation between financial stressors and anxiety.
+
+# Import dataset 4
+mental <- 
+  read.csv(file = 'Mental Health Dataset.csv', header = TRUE, sep =",", stringsAsFactors = FALSE)
+# Fourth dataset
+head(mental)
+# Turn data into dataframe
+mental <- as.data.frame(mental)
+# Remove columns that we don't need 
+colnames(mental)
+mental <- subset(mental, select = -c(Occupation, self_employed, family_history, Days_Indoors, Growing_Stress, Changes_Habits, Mental_Health_History, Mood_Swings, Coping_Struggles, Work_Interest, Social_Weakness, mental_health_interview, care_options))
+# Limit to US
+mental <- subset(mental, Country == "United States")
+# Remove rows missing data
+mental <- mental[complete.cases(mental),]
+# Check that the data has been trimmed
+head(mental, 8)
+# Female to male anxiety percentage
+mental$Timestamp <- substr(mental$Timestamp, 1, 4)
+head(mental, 8)
+unique(mental$Timestamp)
+# Treatment vs. No Treatment 2014
+mental_total_no_treatment_male <- nrow(mental[mental$Timestamp == '2014' & mental$Gender == 'Male' & mental$treatment == 'No',])
+mental_total_no_treatment_fem <- nrow(mental[mental$Timestamp == '2014' & mental$Gender == 'Female' & mental$treatment == 'No',])
+mental_total_treatment_male <- nrow(mental[mental$Timestamp == '2014' & mental$Gender == 'Male' & mental$treatment == 'Yes',])
+mental_total_treatment_fem <- nrow(mental[mental$Timestamp == '2014' & mental$Gender == 'Female' & mental$treatment == 'Yes',])
+mental_total_female <- mental_total_treatment_fem + mental_total_no_treatment_fem
+mental_total_male <- mental_total_treatment_male + mental_total_no_treatment_male
+percent_fem_treatment <- (mental_total_treatment_fem/(mental_total_treatment_fem + mental_total_no_treatment_fem))*100
+percent_male_treatment <- (mental_total_treatment_male/(mental_total_treatment_male + mental_total_no_treatment_male))*100
+total_people <- mental_total_treatment_male + mental_total_no_treatment_male + mental_total_treatment_fem + mental_total_no_treatment_fem
+total_treatment <- (mental_total_treatment_male + mental_total_treatment_fem)
+total_no_treatment <- total_people - total_treatment
+percent_total_treatment <- (total_treatment/total_people)*100
+# Make a dataframe of the data
+male <- c(format(round(mental_total_male, 0)), format(round(mental_total_no_treatment_male, 0)), format(round(mental_total_treatment_male, 0)), format(round(percent_male_treatment, 2)))
+female <- c(format(round(mental_total_female, 0)), format(round(mental_total_no_treatment_fem, 0)), format(round(mental_total_treatment_fem, 0)), format(round(percent_fem_treatment, 2)))
+total <- c(format(round(total_people, 0)), format(round(total_no_treatment, 0)), format(round(total_treatment, 0)), format(round(percent_total_treatment, 2)))
+tab_tot_fem_male <- cbind(total, male, female)
+colnames(tab_tot_fem_male) <- c('Total', 'Male', 'Female')
+rownames(tab_tot_fem_male) <- c('Total People', 'No Treatment', 'Treatment', 'Percentage Receiving Treatment')
+tab_tot_fem_male
+
+####MUCH SMALLER DATASET NOT USED
+## Female to male anxiety percentage 2015 
+# mental_total_15 <- nrow(mental[mental$Timestamp == '2015' & mental$treatment == 'Yes',])
+# mental_total_fem_15 <- nrow(mental[mental$Timestamp == '2015' & mental$treatment == 'Yes' & mental$Gender == 'Female',])
+# mental_total_male_15 <- nrow(mental[mental$Timestamp == '2015' & mental$treatment == 'Yes' & mental$Gender == 'Male',])
+# mental_total_15
+# mental_total_fem_15
+# mental_total_male_15
+# percent_tot_fem_15 <- (mental_total_fem_15/mental_total_15)*100
+# percent_tot_fem_15
+# percent_tot_male_15 <- (mental_total_male_15/mental_total_15)*100
+# percent_tot_male_15
+
+####MUCH SMALLER DATASET NOT USED
+## Female to male anxiety percentage 2016
+# mental_total_16 <- nrow(mental[mental$Timestamp == '2016' & mental$treatment == 'Yes',])
+# mental_total_fem_16 <- nrow(mental[mental$Timestamp == '2016' & mental$treatment == 'Yes' & mental$Gender == 'Female',])
+# mental_total_male_16 <- nrow(mental[mental$Timestamp == '2016' & mental$treatment == 'Yes' & mental$Gender == 'Male',])
+# mental_total_16
+# mental_total_fem_16
+# mental_total_male_16
+# percent_tot_fem_16 <- (mental_total_fem_16/mental_total_16)*100
+# percent_tot_fem_16
+# percent_tot_male_16 <- (mental_total_male_16/mental_total_16)*100
+# percent_tot_male_16
+
+# Import datatset 5
+prevalence <- 
+  read.csv(file = 'prevalence-of-anxiety-disorders-males-vs-females.csv', header = TRUE, sep =",", stringsAsFactors = FALSE)
+# Fifth dataset
+head(prevalence)
+# Turn data into dataframe
+prevalence <- as.data.frame(prevalence)
+# Remove columns that we don't need
+colnames(prevalence)
+prevalence <- subset(prevalence, select = -c(Continent, Population..historical.estimates.))
+# Rename columns
+prevalence <- prevalence %>% 
+  rename(index = index, entity = Entity, code = Code, year = Year, male = Prevalence...Anxiety.disorders...Sex..Male...Age..Age.standardized..Percent., female = Prevalence...Anxiety.disorders...Sex..Female...Age..Age.standardized..Percent.)
+# Check changes
+head(prevalence, 8)
+unique(prevalence$entity)
+# Subset to just the US
+prevalence <- subset(prevalence, entity == "United States")
+head(prevalence)
+unique(prevalence$year)
+prevalence <- filter(prevalence, year > 1990)
+# Plot % of people experiencing anxiety
+prevalence_plot_male <- ggplot(prevalence, aes(year, male))
+prevalence_plot_male + geom_point(shape = 18, size = 2.8, color = "purple") + theme(panel.grid = 
+   element_line(color = "lightgrey", linewidth = 0.8, linetype = 1), 
+   panel.background = element_rect(color = "white", fill = "darkgrey")) +
+  labs(title = "US Anxiety Male", x ="Year", y = "Percent of Males Experiencing Anxiety") +
+  theme(axis.text.x = element_text(angle = 90))
+# Plot % of people experiencing anxiety
+prevalence_plot_female <- ggplot(prevalence, aes(year, female))
+prevalence_plot_female + geom_point(shape = 18, size = 2.8, color = "purple") + theme(panel.grid = 
+ element_line(color = "lightgrey", linewidth = 0.8, linetype = 1), 
+ panel.background = element_rect(color = "white", fill = "darkgrey")) +
+  labs(title = "US Anxiety Female", x ="Year", y = "Percent of Females Experiencing Anxiety") +
+  theme(axis.text.x = element_text(angle = 90))
+
+# Import dataset 6
+meds <- 
+  read.csv(file = 'psychiatric_drug_webmd_reviews.csv', header = TRUE, sep =",", stringsAsFactors = FALSE)
+# Sixth dataset
+head(meds)
+# Turn data into dataframe
+meds <- as.data.frame(meds)
+# Remove columns that we don't need
+colnames(meds)
+meds <- subset(meds, select = -c(time_on_drug, text))
+# Find conditions that are anxiety related
+unique(meds$condition)
+# The following would qualify as something I don't know how to do that could be helpful to know.
+# I don't know if there is a way to iterate through the unique items in the condition column and find conditions that are anxiety related using R.
+# I would imagine it could be done through a loop and doing a partial match to condition which contains the letters "anx".
+# I looked through the printed conditions myself and then coded the following lines
+unique(meds$drug_name)
+# Remove rows that aren't anxiety related
+meds <- subset(meds, condition == "Anxious" | condition == "Severe Anxiety" | condition == "Repeated Episodes of Anxiety")
+# Remove rows that have missing values
+meds <- meds[complete.cases(meds),] 
+# Check changes
+head(meds, 8)
+
